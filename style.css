@@ -472,14 +472,22 @@ body > * {
 .carousel-prev, .carousel-next { background:var(--primary-color); color:var(--secondary-color); border:none; padding:10px 16px; font-size:20px; cursor:pointer; }
 
 @media (max-width: 768px) {
-    .carousel-content { width: 100%; height: 100%; max-width:100%; padding:16px; }
+    .carousel-content { width: 100% !important; height: 100% !important; max-width:100% !important; padding:14px !important; }
     .carousel-slide { flex-direction: column; }
-    .carousel-img { width: 100%; height: 220px; }
-    .carousel-inner { grid-template-columns: 1fr; gap: 12px; max-height: calc(100vh - 140px); }
-    .carousel { padding: 12px; }
-    .carousel-info h3 { font-size: 15px; }
-    .carousel-info p { font-size: 13px; }
-    .size-select-inline { font-size: 14px; }
+    .carousel-img { width: 100% !important; height: 200px !important; }
+    .carousel-inner { 
+        display: grid !important; 
+        grid-template-columns: 1fr !important; 
+        gap: 14px !important; 
+        max-height: calc(100vh - 120px) !important; 
+        overflow-y: auto !important;
+        padding: 6px !important;
+    }
+    .carousel { padding: 10px !important; }
+    .carousel-card { width: 100% !important; max-width: 100% !important; }
+    .carousel-info h3 { font-size: 15px !important; }
+    .carousel-info p { font-size: 13px !important; }
+    .size-select-inline { font-size: 14px !important; width: 100% !important; }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
