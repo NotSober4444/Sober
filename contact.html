@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOBER — Contact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <button id="menu-toggle" class="menu-toggle">☰</button>
+        <div id="slide-menu" class="slide-menu">
+            <div class="menu-header">
+                <h2 class="menu-logo">SOBER</h2>
+                <button id="menu-close" class="menu-close">✕</button>
+            </div>
+            <nav class="menu-nav">
+                <a href="index.html" class="menu-link">Home</a>
+                <a href="gallery.html" class="menu-link">Gallery</a>
+                <a href="about.html" class="menu-link">About Us</a>
+                <a href="contact.html" class="menu-link">Contact</a>
+            </nav>
+        </div>
+        <button id="cart-btn" class="cart-btn">🛒 <span id="cart-count">0</span></button>
+    </header>
+
+    <main class="contact" style="display:block; padding:60px 30px; max-width:1200px; margin:0 auto;">
+        <h1 style="text-transform:uppercase; letter-spacing:2px; margin-bottom:50px; text-align:center;">Contattaci</h1>
+        
+        <!-- Contact Info & Form Grid -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:60px; margin-bottom:80px;">
+            <!-- Contact Info -->
+            <div>
+                <h2 style="font-size:20px; text-transform:uppercase; letter-spacing:1px; margin-bottom:30px; color:#ff1744;">Informazioni</h2>
+                <div style="background:linear-gradient(135deg,#1a1a1a 0%,#252525 100%); padding:30px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.3);">
+                    <p style="margin-bottom:25px;">
+                        <strong>Email:</strong><br>
+                        <a href="mailto:info@sober.com" style="color:#ff1744; text-decoration:none;">info@sober.com</a>
+                    </p>
+                    <p style="margin-bottom:25px;">
+                        <strong>Telefono:</strong><br>
+                        <a href="tel:+39123456789" style="color:#ff1744; text-decoration:none;">+39 123 456 789</a>
+                    </p>
+                    <p style="margin-bottom:25px;">
+                        <strong>Indirizzo:</strong><br>
+                        Via Minimalista 123<br>
+                        Milano, 20100<br>
+                        Italia
+                    </p>
+                    <p>
+                        <strong>Orari:</strong><br>
+                        Lun - Ven: 10:00 - 18:00<br>
+                        Sab: 11:00 - 17:00<br>
+                        Dom: Chiuso
+                    </p>
+                </div>
+                
+                <!-- Social Links -->
+                <div style="margin-top:40px;">
+                    <h3 style="font-size:16px; text-transform:uppercase; letter-spacing:1px; margin-bottom:15px;">Seguici</h3>
+                    <div style="display:flex; gap:15px;">
+                        <a href="#" style="display:inline-block; width:45px; height:45px; background:#ff1744; color:#000; text-decoration:none; display:flex; align-items:center; justify-content:center; border-radius:3px; font-weight:700;">f</a>
+                        <a href="#" style="display:inline-block; width:45px; height:45px; background:#ff1744; color:#000; text-decoration:none; display:flex; align-items:center; justify-content:center; border-radius:3px; font-weight:700;">ig</a>
+                        <a href="#" style="display:inline-block; width:45px; height:45px; background:#ff1744; color:#000; text-decoration:none; display:flex; align-items:center; justify-content:center; border-radius:3px; font-weight:700;">tk</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div>
+                <h2 style="font-size:20px; text-transform:uppercase; letter-spacing:1px; margin-bottom:30px; color:#ff1744;">Inviaci un Messaggio</h2>
+                <form class="contact-form" style="background:linear-gradient(135deg,#1a1a1a 0%,#252525 100%); padding:30px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.3);">
+                    <input type="text" placeholder="Nome" required style="margin-bottom:15px;">
+                    <input type="email" placeholder="Email" required style="margin-bottom:15px;">
+                    <textarea placeholder="Messaggio" rows="6" required style="margin-bottom:20px;"></textarea>
+                    <button type="submit" class="cta-btn" style="width:100%; padding:14px; background:#ff1744; color:#000; border:none; font-weight:700; cursor:pointer; text-transform:uppercase; letter-spacing:1px; transition:all 0.3s ease;">Invia Messaggio</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Newsletter Section -->
+        <div style="background:linear-gradient(135deg,#ff1744 0%,#ff4757 100%); padding:60px 40px; border-radius:8px; text-align:center; color:#000;">
+            <h2 style="margin:0 0 15px 0; font-size:28px; text-transform:uppercase; letter-spacing:2px;">Iscriviti alla Newsletter</h2>
+            <p style="margin-bottom:30px; font-size:16px; opacity:0.95;">Resta aggiornato su nuovi arrivi e offerte esclusive</p>
+            <form id="newsletter-form" style="display:flex; gap:10px; max-width:500px; margin:0 auto;">
+                <input type="email" placeholder="La tua email" required style="flex:1; padding:14px; border:none; border-radius:3px; background:#fff; color:#000; font-weight:600;">
+                <button type="submit" style="padding:14px 30px; background:#000; color:#ff1744; border:none; font-weight:700; cursor:pointer; text-transform:uppercase; border-radius:3px; transition:all 0.3s ease;">Iscriviti</button>
+            </form>
+            <p style="margin-top:15px; font-size:12px; opacity:0.8;">Non condivideremo mai la tua email con terzi.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 SOBER. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

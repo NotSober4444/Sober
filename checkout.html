@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOBER — Checkout</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- PayPal SDK: sostituisci YOUR_CLIENT_ID con il tuo ID (Sandbox o Live) -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AVLqfRGxhITIzvkZSzv-paslk1pHUWCyy1sk-IJgdPZto1CL2-XfRE0sPZEkrN8ouqTuRz5l1gV8v-1F&currency=EUR&disable-funding=mybank"></script>
+</head>
+<body>
+    <header class="header" style="position:relative;">
+        <a href="index.html" class="menu-logo" style="text-decoration:none; color:inherit;">SOBER</a>
+    </header>
+
+    <main class="checkout" style="max-width:720px; margin:60px auto; padding:0 20px; color:var(--secondary-color);">
+        <div style="background:linear-gradient(135deg,#1a1a1a 0%,#252525 100%); padding:40px; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+            <h1 style="margin:0 0 30px 0; text-transform:uppercase; letter-spacing:2px; font-size:28px;">Riepilogo Ordine</h1>
+            <div id="summary" style="margin-bottom:30px;"></div>
+            <div style="border-top:2px solid #ff1744; padding-top:20px; margin-top:20px;">
+                <h2 style="margin-top:0; font-size:20px; text-transform:uppercase; letter-spacing:1px; margin-bottom:20px;">Seleziona Metodo di Pagamento</h2>
+                <div id="paypal-button-container"></div>
+            </div>
+            <p style="margin-top:24px; font-size:13px; color:#999; text-align:center;">Pagamento sicuro gestito da PayPal</p>
+        </div>
+    </main>
+
+    <script>
+    // Recupera carrello e totale salvati
+    const cart = JSON.parse(localStorage.getItem('soberCart') || '[]');
+    const total = parseFloat(localStorage.getItem('soberCartTotal') || '0');
+
+    // Mostra riepilogo
+    const summary = document.getElementById('summary');
+    if (!cart.length) {
+        summary.innerHTML = '<p style="color:#ff1744; font-size:16px;">Il carrello è vuoto. Torna indietro e aggiungi prodotti.</p>';
+    } else {
+        const list = cart.map(item => {
+            const size = item.size ? ` (Taglia: ${item.size})` : '';
+            const itemTotal = (item.price * item.quantity).toFixed(2);
+            return `<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);">
+                <div><strong>${item.name}</strong><br><span style="font-size:13px;color:#aaa;">${size} • Qtà: ${item.quantity}</span></div>
+                <span style="color:#ff1744;font-weight:700;">€${itemTotal}</span>
+            </div>`;
+        }).join('');
+        summary.innerHTML = `
+            ${list}
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;font-size:18px;font-weight:700;color:#ff1744;">
+                <span>TOTALE:</span>
+                <span>€${total.toFixed(2)}</span>
+            </div>
+        `;
+    }
+
+    // Inizializza PayPal Buttons
+    paypal.Buttons({
+        style: {
+            layout: 'vertical',
+            color: 'blue',
+            shape: 'rect',
+            label: 'pay',
+            tagline: false
+        },
+        createOrder: (data, actions) => {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: { value: total.toFixed(2) }
+                }]
+            });
+        },
+        onApprove: (data, actions) => {
+            return actions.order.capture().then(details => {
+                // Svuota carrello e vai a thank you
+                localStorage.removeItem('soberCart');
+                localStorage.removeItem('soberCartTotal');
+                window.location.href = 'thank-you.html';
+            });
+        },
+        onCancel: () => {
+            alert('Pagamento annullato. Puoi riprovare.');
+        },
+        onError: (err) => {
+            console.error(err);
+            alert('Errore nel pagamento. Controlla la console per dettagli.');
+        }
+    }).render('#paypal-button-container');
+    </script>
+</body>
+</html>

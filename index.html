@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOBER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="home-page">
+    <!-- Header -->
+    <header class="header">
+        <button id="menu-toggle" class="menu-toggle">☰</button>
+        
+        <!-- Slide Menu -->
+        <div id="slide-menu" class="slide-menu">
+            <div class="menu-header">
+                <h2 class="menu-logo">SOBER</h2>
+                <button id="menu-close" class="menu-close">✕</button>
+            </div>
+            
+            <nav class="menu-nav">
+                <a href="index.html" class="menu-link">Home</a>
+                <a href="gallery.html" class="menu-link">Gallery</a>
+                <a href="about.html" class="menu-link">About Us</a>
+                <a href="contact.html" class="menu-link">Contact</a>
+            </nav>
+
+            <!-- menu-footer rimosso secondo richiesta utente -->
+        </div>
+
+        <!-- Cart Icon in Header -->
+        <button id="cart-btn" class="cart-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span id="cart-count">0</span>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>SOBER</h1>
+            <p>Stile minimalista, qualità massima</p>
+            <button id="cta-collection" class="cta-btn">Collection</button>
+        </div>
+    </section>
+
+    <!-- Main content remains minimal; pages for Gallery/About/Contact are separate files -->
+
+    <!-- Carousel Modal for collection preview -->
+    <div id="collection-carousel" class="carousel" aria-hidden="true">
+        <div class="carousel-content">
+            <button class="carousel-close" aria-label="Chiudi">✕</button>
+            <div class="carousel-inner">
+                <!-- Slides injected by script.js -->
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-prev">‹</button>
+                <button class="carousel-next">›</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal (full image view) -->
+    <div id="product-detail-modal" class="product-detail-modal">
+        <div class="product-detail-content">
+            <button class="product-detail-close" aria-label="Chiudi">✕</button>
+            <div class="product-detail-viewer">
+                <button class="product-detail-prev">‹</button>
+                <div id="product-detail-image-container" style="position:relative; overflow:hidden; width:100%; max-height:80vh; display:flex; align-items:center; justify-content:center; background:#000;">
+                        <span id="product-detail-counter-badge" style="position:absolute; top:10px; right:10px; background:transparent; color:#fff; font-weight:700; padding:6px 10px; border-radius:12px; font-size:12px; z-index:1; text-shadow:0 1px 2px rgba(0,0,0,0.6);">1 / 1</span>
+                    <img id="product-detail-image" src="" alt="" style="width:100%; max-height:80vh; object-fit:contain; cursor:zoom-in; transition:transform 0.3s ease;">
+                </div>
+                <button class="product-detail-next">›</button>
+            </div>
+            <div class="product-detail-info">
+                <h2 id="product-detail-name"></h2>
+                <p id="product-detail-price" style="font-size:18px; color:#ff1744; font-weight:700; margin:10px 0;"></p>
+                <select id="product-detail-size" style="width:100%; padding:10px; margin-bottom:15px; display:none; background:#252525; color:#fff; border:1px solid #ff1744;"></select>
+                <button id="product-detail-add-btn" class="cta-btn" style="width:100%; padding:14px; background:#ff1744; color:#000; border:none; font-weight:700; cursor:pointer; text-transform:uppercase; letter-spacing:1px;">Aggiungi al Carrello</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 SOBER. Tutti i diritti riservati.</p>
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">TikTok</a>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-content">
+            <span class="close">&times;</span>
+            <h2>Carrello</h2>
+            <div id="cart-items" class="cart-items">
+                <!-- Articoli del carrello caricati da JS -->
+            </div>
+            <div class="cart-total">
+                <p>Totale: €<span id="total-price">0.00</span></p>
+            </div>
+            <button id="checkout-btn" class="cta-btn" style="width: 100%;">Procedi al Checkout</button>
+        </div>
+    </div>
+
+    <!-- panel removed: sections are separate pages -->
+
+    <script src="script.js"></script>
+</body>
+</html> 
