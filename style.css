@@ -467,6 +467,9 @@ body > * {
         grid-template-columns: 1fr !important; 
         gap: 12px !important;
         max-height: calc(100vh - 100px) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 8px !important;
     }
 }
 .carousel-card {
@@ -477,6 +480,17 @@ body > * {
     flex-direction: column;
     gap: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .carousel-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        padding: 10px !important;
+        margin: 0 !important;
+    }
 }
 .carousel-img { width: 100%; height: 180px; object-fit: cover; background: #eee; border-radius: 3px; }
 .carousel-info { display:flex; flex-direction: column; gap:6px; }
