@@ -29,6 +29,24 @@ Note: Sito statico, nessun build command; publish directory è la root.
 - Carosello: mostra una sola immagine per capo (prima di `images`)
 - Dettaglio prodotto: navigazione tra immagini, badge "k / n" in alto a destra
 
+### Esempio oggetto prodotto
+```js
+{
+   id: 10,
+   name: 'T-Shirt Logo - SOBER',
+   category: 'maglieria',
+   price: 39.99,
+   sizes: ['S','M','L'],
+   images: [
+      'https://picsum.photos/400/300?random=10',
+      'https://picsum.photos/400/300?random=110'
+   ]
+}
+```
+Note:
+- `images[0]` è usata nel carosello; nel modal si può navigare tra tutte.
+- `sizes` è opzionale; se presente, appare la select nel dettaglio.
+
 ## Interazioni chiave
 - Zoom: click sull’immagine + rotella; niente pulsante
 - Pan: drag quando zoomato
