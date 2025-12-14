@@ -53,6 +53,20 @@ Note:
 - Carrello: aggiunta solo da modale collezione/dettaglio
 - Gallery: lightbox attivo (non per il carosello)
 
+## Aggiungere foto alla Gallery
+Apri `gallery.html` e aggiungi un blocco `.photo-item` dentro il container della gallery:
+
+```html
+<div class="photo-item">
+   <img src="assets/nuova-foto.jpg" alt="Titolo della foto">
+   <p class="photo-caption">Titolo / descrizione della foto</p>
+   </div>
+```
+
+Note:
+- Metti il file nella cartella `assets/` e usa il percorso relativo.
+- Il lightbox si apre cliccando sulla foto; la didascalia viene mostrata sotto.
+
 ## Checkout PayPal
 - Bottone in `checkout.html` con SDK PayPal (EUR)
 - Funding "mybank" disabilitato
