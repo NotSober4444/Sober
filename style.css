@@ -452,7 +452,23 @@ body > * {
     font-size: 22px;
     cursor: pointer;
 }
-.carousel-inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-height: 60vh; overflow-y: auto; padding: 8px; }
+.carousel-inner { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 18px; 
+    max-height: 60vh; 
+    overflow-y: auto; 
+    padding: 8px; 
+}
+
+/* Force mobile layout immediately */
+@media (max-width: 480px) {
+    .carousel-inner { 
+        grid-template-columns: 1fr !important; 
+        gap: 12px !important;
+        max-height: calc(100vh - 100px) !important;
+    }
+}
 .carousel-card {
     background: #fff;
     border-radius: 4px;
