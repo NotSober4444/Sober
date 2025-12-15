@@ -501,8 +501,11 @@ productDetailPrev.addEventListener('click', () => showProductImage(currentImageI
 productDetailNext.addEventListener('click', () => showProductImage(currentImageIndex + 1));
 // Zoom button removed
 
+// Click sull'immagine del modal apre lightbox zoomabile
 productDetailImage.addEventListener('click', () => {
-    if (!isZoomed) toggleZoom();
+    if (!currentProductDetail) return;
+    const images = currentProductDetail.images || [currentProductDetail.image];
+    openImageLightbox(images[currentImageIndex], currentProductDetail.name);
 });
 
 // Zoom con scroll
@@ -659,14 +662,81 @@ const lightboxImage = photoLightbox.querySelector('#lightbox-image');
 const lightboxCaption = photoLightbox.querySelector('#lightbox-caption');
 const lightboxClose = photoLightbox.querySelector('.lightbox-close');
 
+// Variabili per pinch-to-zoom nel lightbox
+let lightboxZoom = 1;
+let lightboxPanX = 0;
+let lightboxPanY = 0;
+let lightboxTouchStartDistance = 0;
+let lightboxTouchStartZoom = 1;
+let lightboxTouchStartPanX = 0;
+let lightboxTouchStartPanY = 0;
+
 function openLightbox(src, captionText) {
     lightboxImage.src = src;
     lightboxCaption.textContent = captionText || '';
     photoLightbox.classList.add('active');
+    resetLightboxZoom();
 }
 
 function closeLightbox() {
     photoLightbox.classList.remove('active');
+    resetLightboxZoom();
+}
+
+function resetLightboxZoom() {
+    lightboxZoom = 1;
+    lightboxPanX = 0;
+    lightboxPanY = 0;
+    updateLightboxTransform();
+}
+
+function updateLightboxTransform() {
+    lightboxImage.style.transform = `scale(${lightboxZoom}) translate(${lightboxPanX}px, ${lightboxPanY}px)`;
+}
+
+function getTouchDistanceLightbox(touches) {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+// Touch gestures per lightbox
+lightboxImage.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 2) {
+        e.preventDefault();
+        lightboxTouchStartDistance = getTouchDistanceLightbox(e.touches);
+        lightboxTouchStartZoom = lightboxZoom;
+    } else if (e.touches.length === 1 && lightboxZoom > 1) {
+        e.preventDefault();
+        lightboxTouchStartPanX = e.touches[0].clientX - lightboxPanX;
+        lightboxTouchStartPanY = e.touches[0].clientY - lightboxPanY;
+    }
+});
+
+lightboxImage.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 2) {
+        e.preventDefault();
+        const currentDistance = getTouchDistanceLightbox(e.touches);
+        const scale = currentDistance / lightboxTouchStartDistance;
+        lightboxZoom = Math.max(1, Math.min(4, lightboxTouchStartZoom * scale));
+        updateLightboxTransform();
+    } else if (e.touches.length === 1 && lightboxZoom > 1) {
+        e.preventDefault();
+        lightboxPanX = e.touches[0].clientX - lightboxTouchStartPanX;
+        lightboxPanY = e.touches[0].clientY - lightboxTouchStartPanY;
+        updateLightboxTransform();
+    }
+});
+
+lightboxImage.addEventListener('touchend', (e) => {
+    if (e.touches.length === 0 && lightboxZoom <= 1.05) {
+        resetLightboxZoom();
+    }
+});
+
+// Funzione per aprire lightbox da product detail
+function openImageLightbox(src, captionText) {
+    openLightbox(src, captionText);
 }
 
 // Click on gallery photo-item
