@@ -6,6 +6,21 @@
     <title>SOBER</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Force mobile carousel layout - inline for maximum priority */
+        @media (max-width: 480px) {
+            .carousel-inner {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 12px !important;
+            }
+            .carousel-card {
+                display: block !important;
+                width: 100% !important;
+                flex: none !important;
+            }
+        }
+    </style>
 </head>
 <body class="home-page">
     <!-- Header -->
