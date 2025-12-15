@@ -6,6 +6,32 @@
     <title>SOBER — Contact</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Force mobile contact layout */
+        @media (max-width: 480px) {
+            .contact { padding: 30px 16px !important; }
+            .contact > div {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 30px !important;
+            }
+            .contact input,
+            .contact textarea,
+            .contact button {
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            #newsletter-form {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 10px !important;
+            }
+            #newsletter-form input,
+            #newsletter-form button {
+                width: 100% !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
