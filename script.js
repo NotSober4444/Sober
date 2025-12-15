@@ -552,6 +552,71 @@ document.addEventListener('mouseup', () => {
     }
 });
 
+// Touch gestures for mobile: pinch-to-zoom and pan
+let touchStartDistance = 0;
+let touchStartZoom = 1;
+let isTouching = false;
+let touchStartPanX = 0;
+let touchStartPanY = 0;
+
+function getTouchDistance(touch1, touch2) {
+    const dx = touch1.clientX - touch2.clientX;
+    const dy = touch1.clientY - touch2.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+productDetailImage.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 2) {
+        // Pinch to zoom
+        e.preventDefault();
+        touchStartDistance = getTouchDistance(e.touches[0], e.touches[1]);
+        touchStartZoom = zoomLevel;
+    } else if (e.touches.length === 1 && isZoomed) {
+        // Pan when zoomed
+        e.preventDefault();
+        isTouching = true;
+        touchStartPanX = e.touches[0].clientX - panX;
+        touchStartPanY = e.touches[0].clientY - panY;
+    }
+}, { passive: false });
+
+productDetailImage.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 2) {
+        // Pinch zoom
+        e.preventDefault();
+        const currentDistance = getTouchDistance(e.touches[0], e.touches[1]);
+        const scale = currentDistance / touchStartDistance;
+        zoomLevel = Math.max(1, Math.min(3, touchStartZoom * scale));
+        
+        if (zoomLevel > 1) {
+            isZoomed = true;
+        } else {
+            resetImageZoom();
+        }
+        updateImageTransform();
+    } else if (e.touches.length === 1 && isTouching && isZoomed) {
+        // Pan
+        e.preventDefault();
+        panX = e.touches[0].clientX - touchStartPanX;
+        panY = e.touches[0].clientY - touchStartPanY;
+        
+        const maxPan = 50;
+        panX = Math.max(-maxPan, Math.min(maxPan, panX));
+        panY = Math.max(-maxPan, Math.min(maxPan, panY));
+        
+        updateImageTransform();
+    }
+}, { passive: false });
+
+productDetailImage.addEventListener('touchend', (e) => {
+    if (e.touches.length === 0) {
+        isTouching = false;
+        if (zoomLevel <= 1) {
+            resetImageZoom();
+        }
+    }
+});
+
 productDetailModal.addEventListener('click', (e) => {
     if (e.target === productDetailModal) closeProductDetail();
 });
