@@ -929,7 +929,7 @@ main.contact-minimal::before {
 .photo-lightbox {
     display: none;
     position: fixed;
-    z-index: 4000; /* above carousel (3000) */
+    z-index: 6000; /* above product-detail-modal (5000) */
     left: 0;
     top: 0;
     width: 100%;
